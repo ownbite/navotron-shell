@@ -1,0 +1,3 @@
+[submodule "navotron"]
+	path = navotron
+	url = https://github.com/ownbite/navotron.git
