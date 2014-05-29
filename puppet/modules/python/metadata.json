@@ -1,0 +1,35 @@
+{
+  "name": "stankevich-python",
+  "version": "1.1.7",
+  "source": "git://github.com/stankevich/puppet-python",
+  "author": "Sergey Stankevich",
+  "license": "Apache License, Version 2.0",
+  "summary": "Puppet module for Python",
+  "description": "Installs and manages Python, pip, virtualenv, Gunicorn virtual hosts.",
+  "project_page": "https://github.com/stankevich/puppet-python",
+  "dependencies": [
+
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "LICENSE.md": "7e73614426b4f6e7b6063c90c199fdae",
+    "Modulefile": "df575da98fce5f32e45e9b78a4d23971",
+    "README.md": "5ccb1a04cd6ce92dab169eba20249e3d",
+    "Rakefile": "8e90761618737068e0560920b6b2b5a7",
+    "manifests/config.pp": "3be9d7fc68314f0c8c7382242e2f7c35",
+    "manifests/gunicorn.pp": "de99a3ce402db6d61c2fef9b7377f51b",
+    "manifests/init.pp": "d6a848ecbeeac3036477491997e683ed",
+    "manifests/install.pp": "9ed47de5389c939dbcaac49e990566d8",
+    "manifests/pip.pp": "79c220a58289497d29ebfee5b122d16c",
+    "manifests/requirements.pp": "813aa46cc783ffc0051ebe542f5299e7",
+    "manifests/virtualenv.pp": "834c3164d1797ad67213928b8700b1df",
+    "templates/gunicorn.erb": "93bbb6e3d82f93a097c3d70b19528550",
+    "tests/gunicorn.pp": "ff0a894efdce0b7a51b64d884616c128",
+    "tests/init.pp": "251c210b05aab1f84c49a38f7fe48bbe",
+    "tests/pip.pp": "e3a793d4c714c39df31f3f79f0d7629c",
+    "tests/requirements.pp": "779b5cd2e6a8c35a73265a974c0a7e6b",
+    "tests/virtualenv.pp": "698f811b9110cbc5d9262f0500bd7ee4"
+  }
+}
