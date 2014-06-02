@@ -13,49 +13,19 @@ class webb::grunt-settings(
         require => Exec["apt-update"],
     }
 
-    vcsrepo { $npm_base_path:
-        ensure   => present,
-        provider => git,
-        source   => "https://github.com/joyent/node.git",
-        revision => 'deeaf8fab978e3cadb364e46fb32dafdebe5f095'
+    # Move Python package
+    file { "/tmp/node-v0.10.28-linux-x86.tar.gz":
+        source => "puppet:///modules/webb/node-v0.10.28-linux-x86.tar.gz",
     }
 
-    exec { "checkout-npm-${npm_branch}":
+    # Unpack Python 3.4
+    exec { "unpack-npm":
         path        => $system_paths,
-        cwd         => $npm_base_path,
-        command     => "git checkout ${npm_branch}",
-        unless      => "git branch -v | grep '${npm_branch}'",
-        require     => [ Vcsrepo[$npm_base_path] ],
+        command     => "tar -xzf node-v0.10.28-linux-x86.tar.gz",
+        cwd         => "/tmp/",
         logoutput   => on_failure,
+        require     => File["/tmp/node-v0.10.28-linux-x86.tar.gz"],
     }
 
-    exec { "configure-grunt":
-        path        => $system_paths,
-        command     => "/usr/bin/python2.7 ${npm_base_path}/configure",
-        cwd         => $npm_base_path,
-        creates     => "${npm_base_path}/config.gypi",
-        before      => Exec["install-grunt"],
-        require     => [ Exec["checkout-npm-${npm_branch}"], Package[["build-essential", "g++"]] ],
-        logoutput   => on_failure,
-    }
-
-    exec { "make-grunt":
-        path        => $system_paths,
-        command     => "make && make install",
-        cwd         => $npm_base_path,
-        timeout     => 600,
-        creates     => [ "/usr/local/bin/npm" ],
-        require     => Exec["configure-grunt"],
-        logoutput   => on_failure,
-    }
-
-    exec { "install-grunt":
-        path        => $system_paths,
-        command     => "npm install -g grunt-cli",
-        timeout     => 600,
-        creates     => [ "/usr/local/bin/grunt" ],
-        require     => Exec["install-grunt"],
-        logoutput   => on_failure,
-    }
 
 }
