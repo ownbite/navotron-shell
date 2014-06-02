@@ -16,7 +16,9 @@ class webb::params {
 	# Custom variables
 	$virtenvwrap_workon	    = "~/envs"
 	$project_name		    = "sbt"
-	$npm_branch			    = "0.10.5"
+	$npm_branch			    = "v0.10.5"
 	$npm_base_path			= "/tmp/npm-git-clone"
+	$python_base_path		= "/tmp/Python-3.4.1"
+
 
 }

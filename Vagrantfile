@@ -17,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise32.box"
 
   # Set hostname
-  config.vm.hostname = "navotron.se"
+  config.vm.hostname = "navotron.local"
 
   # A shell script that will install things on the server
   config.vm.provision :shell, :path => "bootstrap.sh"
@@ -26,7 +26,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   config.vm.network :forwarded_port, guest: 80, host: 8080
-  config.vm.network :forwarded_port, guest: 27017, host: 50004
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.

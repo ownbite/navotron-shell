@@ -17,34 +17,35 @@ class webb::grunt-settings(
         ensure   => present,
         provider => git,
         source   => "https://github.com/joyent/node.git",
+        revision => 'deeaf8fab978e3cadb364e46fb32dafdebe5f095'
     }
 
     exec { "checkout-npm-${npm_branch}":
         path        => $system_paths,
         cwd         => $npm_base_path,
-        command     => "git checkout v${npm_branch}",
+        command     => "git checkout ${npm_branch}",
         unless      => "git branch -v | grep '${npm_branch}'",
         require     => [ Vcsrepo[$npm_base_path] ],
         logoutput   => on_failure,
     }
 
-    exec { "./configure":
+    exec { "configure-grunt":
         path        => $system_paths,
-        command     => "${npm_base_path}/configure",
+        command     => "/usr/bin/python2.7 ${npm_base_path}/configure",
         cwd         => $npm_base_path,
         creates     => "${npm_base_path}/config.gypi",
-        before      => Exec["make-install-npm"],
+        before      => Exec["install-grunt"],
         require     => [ Exec["checkout-npm-${npm_branch}"], Package[["build-essential", "g++"]] ],
         logoutput   => on_failure,
     }
 
-    exec { "make && make install":
+    exec { "make-grunt":
         path        => $system_paths,
+        command     => "make && make install",
         cwd         => $npm_base_path,
-        alias       => "make-install-npm",
         timeout     => 600,
         creates     => [ "/usr/local/bin/npm" ],
-        require     => Exec["./configure"],
+        require     => Exec["configure-grunt"],
         logoutput   => on_failure,
     }
 
@@ -53,7 +54,7 @@ class webb::grunt-settings(
         command     => "npm install -g grunt-cli",
         timeout     => 600,
         creates     => [ "/usr/local/bin/grunt" ],
-        require     => Exec["make-install-npm"],
+        require     => Exec["install-grunt"],
         logoutput   => on_failure,
     }
 

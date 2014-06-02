@@ -7,23 +7,23 @@ node default {
 	}
 
 	# Install the default packages
-	package { ["sudo", "wget", "htop", "screen", "vim-common", "vim", "unzip"]:
+	package { ["sudo", "wget", "htop", "screen", "vim-common", "vim", "unzip", "make"]:
 		ensure  	=> "present",
 		require  	=> Exec["apt-update"],
 	}
 
 	# Make sure that the main user vagrant is present and belongs to the group www-data
 	user { "vagrant":
-		ensure => "present",
-		groups => ["www-data"]
+		ensure 		=> "present",
+		groups 		=> ["www-data"]
 	}
 
 }
 
-node "sbt.se" inherits default {
+node "navotron" inherits default {
 	class { "webb": }
 
-	Package[["sudo", "wget", "htop", "screen", "vim-common", "vim", "unzip"]] -> User["vagrant"] -> Class["webb"]
+	Package[["sudo", "wget", "htop", "screen", "vim-common", "vim", "unzip", "make"]] -> User["vagrant"] -> Class["webb"]
 }
 
 
