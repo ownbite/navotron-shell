@@ -1,1 +1,1 @@
-{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/work/navotron-shell","disabled":false}}}
+{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/work/navotron-shell","disabled":false},"/tmp/vagrant-puppet-3/manifests":{"owner":"root","guestpath":"/tmp/vagrant-puppet-3/manifests","hostpath":"C:/work/navotron-shell/puppet/manifests","disabled":false},"/tmp/vagrant-puppet-3/modules-0":{"owner":"root","guestpath":"/tmp/vagrant-puppet-3/modules-0","hostpath":"C:/work/navotron-shell/puppet/modules","disabled":false}}}
